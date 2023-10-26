@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Mocanu_Raluca_Lab2.Data;
 
@@ -11,9 +12,10 @@ using Mocanu_Raluca_Lab2.Data;
 namespace Mocanu_Raluca_Lab2.Migrations
 {
     [DbContext(typeof(Mocanu_Raluca_Lab2Context))]
-    partial class Mocanu_Raluca_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20231024152526_BookCategory")]
+    partial class BookCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
