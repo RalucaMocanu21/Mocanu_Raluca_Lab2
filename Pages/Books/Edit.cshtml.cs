@@ -31,14 +31,9 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
                 return NotFound();
             }
 
-            public async Task OnGetAsync()
-            {
-                Book = await _context.Book
-                .Include(b => b.Author)
-                .ToListAsync();
-            }
 
             Book = await _context.Book
+             .Include(b => b.Author)
             .Include(b => b.Publisher)
             .Include(b => b.BookCategories).ThenInclude(b => b.Category)
             .AsNoTracking()
@@ -75,14 +70,10 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
                 return NotFound();
             }
 
-            public async Task OnGetAsync()
-            {
-                Book = await _context.Book
-                .Include(b => b.Author)
-                .ToListAsync();
-            }
+           
 
             var bookToUpdate = await _context.Book
+          .Include(i => i.Author)
          .Include(i => i.Publisher)
          .Include(i => i.BookCategories)
          .ThenInclude(i => i.Category)
