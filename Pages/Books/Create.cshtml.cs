@@ -21,8 +21,8 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
 
         public IActionResult OnGet()
         {
-            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
-          "PublisherName");
+            //ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
+          //"PublisherName");
              var authorList = _context.Author.Select(x => new
                              {
                              x.ID,
@@ -43,7 +43,7 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
         }
 
         [BindProperty]
-        public Book Book { get; set; } = default!;
+        public Book Book { get; set; } 
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
@@ -62,10 +62,10 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
                     newBook.BookCategories.Add(catToAdd);
                 }
             }
-            if (!ModelState.IsValid || _context.Book == null || Book == null)
-            {
-                return Page();
-            }
+            //if (!ModelState.IsValid || _context.Book == null || Book == null)
+            //{
+                //return Page();
+            //}
 
             Book.BookCategories = newBook.BookCategories;
             _context.Book.Add(Book);

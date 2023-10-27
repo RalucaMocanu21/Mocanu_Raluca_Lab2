@@ -22,11 +22,11 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
         }
 
         [BindProperty]
-        public Book Book { get; set; } = default!;
+        public Book Book { get; set; } 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Book == null)
+            if (id == null )
             {
                 return NotFound();
             }
@@ -45,13 +45,13 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
             .FirstOrDefaultAsync(m => m.ID == id);
 
 
-            var book =  await _context.Book.FirstOrDefaultAsync(m => m.ID == id);
-            if (book == null)
+          ///  var book =  await _context.Book.FirstOrDefaultAsync(m => m.ID == id); 
+            if (Book == null)
             {
                 return NotFound();
             }
-            Book = book;
-            ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
+            ///Book = book;
+            ///ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
           "PublisherName");
 
             PopulateAssignedCategoryData(_context, Book);
@@ -74,7 +74,15 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
             {
                 return NotFound();
             }
-          var bookToUpdate = await _context.Book
+
+            public async Task OnGetAsync()
+            {
+                Book = await _context.Book
+                .Include(b => b.Author)
+                .ToListAsync();
+            }
+
+            var bookToUpdate = await _context.Book
          .Include(i => i.Publisher)
          .Include(i => i.BookCategories)
          .ThenInclude(i => i.Category)
@@ -100,35 +108,35 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
         }
     }
 
-            if (!ModelState.IsValid)
-            {
-                return Page();
+        //    if (!ModelState.IsValid)
+           /// {
+                ///return Page();
             }
 
-_context.Attach(Book).State = EntityState.Modified;
+///_context.Attach(Book).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BookExists(Book.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+          ///  try
+           /// {
+                ///await _context.SaveChangesAsync();
+          ///  }
+           /// catch (DbUpdateConcurrencyException)
+          ///  {
+              ///  if (!BookExists(Book.ID))
+               /// {
+               ///     return NotFound();
+               /// }
+                ///else
+               /// {
+                  ///  throw;
+                ///}
+           /// }
 
-            return RedirectToPage("./Index");
-        }
+            //return RedirectToPage("./Index");
+       /// }
 
-        private bool BookExists(int id)
-        {
-          return (_context.Book?.Any(e => e.ID == id)).GetValueOrDefault();
-        }
-    }
-}
+      ///  private bool BookExists(int id)
+       /// {
+        ///  return (_context.Book?.Any(e => e.ID == id)).GetValueOrDefault();
+       /// }
+   /// }
+///}
