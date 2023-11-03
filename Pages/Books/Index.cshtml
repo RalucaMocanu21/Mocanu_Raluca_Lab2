@@ -11,12 +11,13 @@
     <a asp-action="Create">Create New</a>
 </p>
 
-<form asp-action="Index" method="get">
+<form asp-page="./Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by title: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back to Full List</a>
+            Find by Book Title / Author Name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-primary" /> |
+            <a asp-page="./Index">Back to full List</a>
         </p>
     </div>
 </form>
@@ -25,13 +26,26 @@
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParm"]" asp-routecurrentFilter="@ViewData["CurrentFilter"]">Title</a>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.TitleSort">
+                    @Html.DisplayNameFor(model => model.Book[0].Title)
+                </a>
             </th>
             <th>
-                Author
+                @Html.DisplayNameFor(model => model.Book[0].Price)
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]" asp-routecurrentFilter="@ViewData["CurrentFilter"]">Price</a>
+                @Html.DisplayNameFor(model => model.Book[0].PublishingDate)
+            </th>
+            <th colspan="2">
+                <a asp-page="./Index" asp-route-sortOrder="@Model.AuthorSort">
+                    @Html.DisplayNameFor(model => model.Book[0].Author)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Publisher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].BookCategories)
             </th>
             <th></th>
         </tr>
@@ -59,21 +73,3 @@
     </tbody>
 </table>
 
-@{
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-}
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-pageNumber="@(Model.PageIndex - 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @prevDisabled">
-    Previous
-</a>
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["CurrentSort"]"
-   asp-route-pageNumber="@(Model.PageIndex + 1)"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @nextDisabled">
-    Next
-</a>
