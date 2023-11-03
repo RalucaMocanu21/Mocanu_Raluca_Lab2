@@ -47,7 +47,7 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
             }
             ///Book = book;
             ///ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
-          "PublisherName");
+           // "PublisherName");
 
             PopulateAssignedCategoryData(_context, Book);
             var authorList = _context.Author.Select(x => new

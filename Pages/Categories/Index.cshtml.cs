@@ -23,11 +23,10 @@ namespace Mocanu_Raluca_Lab2.Pages.Categories
 
         public async Task OnGetAsync()
         {
-            if (_context.Category != null)
-            {
-                List<Category> categories = await _context.Category.ToListAsync();
-                Category = categories;
-            }
+
+
+            Category = await _context.Category.ToListAsync();
+
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
                              });
 
             
-            ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
+            ViewData["AuthorID"] = new SelectList(authorList, "ID", "FirstName");
             ViewData["PublisherID"] = new SelectList(_context.Publisher, "ID",
            "PublisherName");
 
