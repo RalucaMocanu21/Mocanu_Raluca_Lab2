@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,40 +21,36 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
         }
 
         [BindProperty]
-        public Book Book { get; set; } 
+        public Book Book { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null )
+            if (id == null || _context.Book == null)
             {
                 return NotFound();
             }
 
 
             Book = await _context.Book
-             .Include(b => b.Author)
             .Include(b => b.Publisher)
             .Include(b => b.BookCategories).ThenInclude(b => b.Category)
             .AsNoTracking()
             .FirstOrDefaultAsync(m => m.ID == id);
 
 
-          ///  var book =  await _context.Book.FirstOrDefaultAsync(m => m.ID == id); 
+          
             if (Book == null)
             {
                 return NotFound();
             }
-            ///Book = book;
-            ///ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
-           // "PublisherName");
-
+           
             PopulateAssignedCategoryData(_context, Book);
-            var authorList = _context.Author.Select(x => new
+           /* var authorList = _context.Author.Select(x => new
             {
-                x.ID,
+                x.AuthorID,
                 FullName = x.LastName + " " + x.FirstName
             });
-            ViewData["AuthorID"] = new SelectList(authorList, "ID", "FullName");
+            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "AuthorID", "AuthorName");*/
             ViewData["PublisherID"] = new SelectList(_context.Publisher, "ID",
            "PublisherName");
             return Page();
@@ -73,7 +68,6 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
            
 
             var bookToUpdate = await _context.Book
-          .Include(i => i.Author)
          .Include(i => i.Publisher)
          .Include(i => i.BookCategories)
          .ThenInclude(i => i.Category)
@@ -102,7 +96,7 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
         //    if (!ModelState.IsValid)
            /// {
                 ///return Page();
-            }
+ }
 
 ///_context.Attach(Book).State = EntityState.Modified;
 

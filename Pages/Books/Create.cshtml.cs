@@ -21,18 +21,9 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
 
         public IActionResult OnGet()
         {
-            //ViewData["PublisherID"] = new SelectList(_context.Set<Publisher>(), "ID",
-          //"PublisherName");
-             var authorList = _context.Author.Select(x => new
-                             {
-                             x.ID,
-                             FullName = x.LastName + " " + x.FirstName
-                             });
-
             
-            ViewData["AuthorID"] = new SelectList(authorList, "ID", "FirstName");
-            ViewData["PublisherID"] = new SelectList(_context.Publisher, "ID",
-           "PublisherName");
+            ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "AuthorID", "AuthorName");
+            ViewData["PublisherID"] = new SelectList(_context.Publisher, "ID", "PublisherName");
 
             var book = new Book();
             book.BookCategories = new List<BookCategory>();
@@ -62,10 +53,7 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
                     newBook.BookCategories.Add(catToAdd);
                 }
             }
-            //if (!ModelState.IsValid || _context.Book == null || Book == null)
-            //{
-                //return Page();
-            //}
+           
 
             Book.BookCategories = newBook.BookCategories;
             _context.Book.Add(Book);

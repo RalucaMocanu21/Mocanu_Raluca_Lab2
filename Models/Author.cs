@@ -2,23 +2,23 @@
 
 namespace Mocanu_Raluca_Lab2.Models
 {
-    public class Author
-    {
-        public int ID { get; set; }
-
-        public string? FirstName { get; set; }
-
-        public string? LastName { get; set; }
-
-        [Display(Name = "Full Name")]
-        public string FullName
+   
+        public class Author
         {
-            get
-            {
-                return FirstName + " " + LastName;
-            }
-        }
+            public int ID { get; set; }
+            public string? FirstName { get; set; }
+            public string? LastName { get; set; }
 
-    }
-    public ICollection<Book>? Books { get; set; }
+            [Display(Name = "Full Name")]
+            public string FullName
+            {
+                get
+                {
+                    return FirstName + " " + LastName;
+                }
+            }
+
+            public ICollection<Book>? Books { get; set; }
+        }
+    
 }

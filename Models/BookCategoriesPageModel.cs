@@ -3,7 +3,7 @@ using Mocanu_Raluca_Lab2.Data;
 
 namespace Mocanu_Raluca_Lab2.Models
 {
-    public class BookCategoriesPageModel
+    public class BookCategoriesPageModel : PageModel
     {
         public List<AssignedCategoryData> AssignedCategoryDataList;
         public void PopulateAssignedCategoryData(Mocanu_Raluca_Lab2Context context,
