@@ -18,7 +18,7 @@ namespace Mocanu_Raluca_Lab2.Models
          public string? Adress { get; set; }
         public string Email { get; set; }
 
-        [RegularExpression(@"^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$", ErrorMessage = "Telefonul trebuie sa fie de forma '0722-123-123' sau'0722.123.123' sau '0722 123 123'")]
+        [RegularExpression(@"^0[0-9]{2,3}[-. ]?[0-9]{3}[-. ]?[0-9]{3}$", ErrorMessage = "Telefonul trebuie să înceapă cu 0 și să fie în formatul '0722-123-123' sau '0722.123.123' sau '0722 123 123'")]
         public string? Phone { get; set; }
 
 
