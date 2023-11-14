@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,6 +12,8 @@ using Mocanu_Raluca_Lab2.Models;
 
 namespace Mocanu_Raluca_Lab2.Pages.Books
 {
+    [Authorize(Roles = "Admin")]
+
     public class EditModel : BookCategoriesPageModel
     {
         private readonly Mocanu_Raluca_Lab2.Data.Mocanu_Raluca_Lab2Context _context;
@@ -51,7 +54,7 @@ namespace Mocanu_Raluca_Lab2.Pages.Books
                 FullName = x.LastName + " " + x.FirstName
             });
             ViewData["AuthorID"] = new SelectList(_context.Set<Author>(), "AuthorID", "AuthorName");*/
-            ViewData["PublisherID"] = new SelectList(_context.Publisher, "ID",
+            ViewData["PublisherID"] = new System.Web.Mvc.SelectList(_context.Publisher, "ID",
            "PublisherName");
             return Page();
         }
